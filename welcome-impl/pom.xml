@@ -46,6 +46,9 @@
 						<Export-Package>!${bundle.namespace}.*</Export-Package>
 						<Private-Package>${bundle.namespace}.*</Private-Package>
 						<Bundle-Activator>${bundle.namespace}.CyActivator</Bundle-Activator>
+                        <Embed-Dependency>poi|poi-ooxml|poi-ooxml-schemas|ooxml-schemas;groupId=org.apache.poi;inline=false</Embed-Dependency>
+                        <Import-Package>junit.*|org.apache.poi.hdgf.*|org.apache.poi.hpbf.*|org.apache.poi.hslf.*|org.apache.poi.hsmf|org.apache.poi.hsmf.*|org.apache.poi.hwpf.*;resolution:=optional,*</Import-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -75,6 +78,17 @@
 			<name>Cytoscape Releases</name>
 			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
 		</repository>
+        <repository>
+            <id>cytoscape_thirdparty</id>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <name>Cytoscape Third Party</name>
+            <url>http://code.cytoscape.org/nexus/content/repositories/thirdparty/</url>
+        </repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -101,6 +115,47 @@
             <groupId>org.cytoscape</groupId>
             <artifactId>webservice-api</artifactId>
         </dependency>
+
+        <!-- Apache poi -->
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <!--
+             org.apache.poi-all (below) consists of the 4 jars listed
+             in this comment. We need to combine them because of a package
+             split between org.apache.poi and org.apache.poi-ooxml.
+        -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>ooxml-schemas</artifactId>
+            <version>1.1</version>
+        </dependency>
+
+        <!--
+		<dependency>
+			<groupId>cytoscape-temp</groupId>
+			<artifactId>org.apache.poi-all</artifactId>
+			<version>3.6</version>
+		</dependency>
+        -->
 
 		<!-- Testing -->
 		<dependency>
